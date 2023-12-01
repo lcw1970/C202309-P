@@ -26,12 +26,20 @@ int calcurater(int a) { // 거스름돈 함수 11/27에 추가
 int Parkspace() { // 11/30일 주차 함수 
 	int num;
 	printf("---------------------\n");
-	printf("몇번자리에 주차하시나요? ");
+	printf("몇번섹션에 주차하시나요? ");
 	scanf_s("%d", &num); // 주차자리 번호
 	printf("---------------------\n"); 
 	return num;
 }
-
+int parkspace2(int a) { // 12/2일 남은자리 표현하는 함수
+	printf("남은섹션 번호는 ");
+	for (int i = 0; i < 10; i++) {
+		if (park[a][i] != 1) {
+			printf("%d번 ", i + 1);
+		}
+	}
+	printf("입니다.\n");
+}
 int main() {
 	int car; // 자동차의 종류
 	int num; // 주차자리 번호
@@ -53,7 +61,8 @@ int main() {
 			CarTypes();
 			scanf_s("%d", &car); // 자동차 종류를 받아옴
 			if (car == 1) { // if문으로 자동차별 주차요금과 남은 주차자리 갯수를 알려줌
-				printf("경차의 남은 주차자리 개수는 %d개 입니다.\n", count_1);
+				printf("현재 경차의 남은 주차자리 개수는 %d개 입니다.\n", count_1);
+				parkspace2(0);
 				num = Parkspace();
 				if (park[0][num - 1] != 1) {
 					park[0][num - 1] = 1;
@@ -71,13 +80,14 @@ int main() {
 				}
 				printf("---------------------\n");
 
-				printf("경차는 직진후 왼쪽으로 가시면 됩니다.\n", coin[0]);
+				printf("경차의 %d번 섹션은 직진후 왼쪽으로 가시면 됩니다.\n",num);
 				count_1--;
 				
 				printf("---------------------\n\n");
 			}
 			else if (car == 2) {
-				printf("승합차의 남은 주차자리 개수는 %d개 입니다.\n", count_2);
+				printf("현재 승합차의 남은 주차자리 개수는 %d개 입니다.\n", count_2);
+				parkspace2(1);
 				num = Parkspace();
 				if (park[1][num - 1] != 1) {
 					park[1][num - 1] = 1;
@@ -94,14 +104,15 @@ int main() {
 					continue;
 				}
 				printf("---------------------\n");
-				printf("승합차는 직진후 우회전 하시면 됩니다.\n", coin[1]);
+				printf("승합차의 %d번 섹션은 직진후 우회전 하시면 됩니다.\n",num);
 				count_2--;
 				
 
 				printf("---------------------\n\n");
 			}
 			else if (car == 3) {
-				printf("트럭의 남은 주차자리 개수는 %d개 입니다.\n", count_3);
+				printf("현재 트럭의 남은 주차자리 개수는 %d개 입니다.\n", count_3);
+				parkspace2(2);
 				num = Parkspace();
 				if (park[2][num - 1] != 1) {
 					park[2][num - 1] = 1;
@@ -118,7 +129,7 @@ int main() {
 					continue;
 				}
 				printf("---------------------\n");
-				printf("트럭은 2층으로 올라가시면 됩니다.\n", coin[2]);
+				printf("트럭의 %d번 섹션은 2층으로 올라가시면 됩니다.\n",num);
 				count_3--;
 				
 
